@@ -44,6 +44,14 @@ github.com/modern-go/reflect2 v1.0.2/go.mod h1:yWuevngMOJpCy52FWWMvUC8ws7m/LJsjY
 github.com/pelletier/go-toml/v2 v2.1.1 h1:LWAJwfNvjQZCFIDKWYQaM62NcYeYViCmWIwmOStowAI=
 github.com/pelletier/go-toml/v2 v2.1.1/go.mod h1:tJU2Z3ZkXwnxa4DPO899bsyIoywizdUvyaeZurnPPDc=
 github.com/pmezard/go-difflib v1.0.0/go.mod h1:iKH77koFhYxTK1pcRnkKkqfTogsbg7gZNVY4sRDYZ/4=
+github.com/prakash-p-3121/errorlib v0.0.3 h1:gOnJJVZh6PXe4Aqjl601qUqO/YeDIt4VKYNwMjeTw28=
+github.com/prakash-p-3121/errorlib v0.0.3/go.mod h1:WbsIYeVd94m0PDkGT28khGC7v94oNhh2sZHL4yHDMfg=
+github.com/prakash-p-3121/errorlib v0.0.6 h1:mc0aczVpeU6fzZse+S5kSoY3Ydj/TpzQKC1seLIfIko=
+github.com/prakash-p-3121/errorlib v0.0.6/go.mod h1:SE/WlVbi9AZJWGC9aH0c0S5C8JU5UMdt6Uj2cwFFYuU=
+github.com/prakash-p-3121/rest-response-lib v0.0.1 h1:uJctYBZXjXvoxHqjr3tZc1EXo99Z9XYxsi7IkiVjGCA=
+github.com/prakash-p-3121/rest-response-lib v0.0.1/go.mod h1:lf/RMd95yLyk1QEldWcAac+uDfd4GXKsH7CLwWMNVeQ=
+github.com/prakash-p-3121/usermodel v0.0.1 h1:62rTqRmghtX207fHQpGi4DCA5lp1dsNrB55OrcpnSeE=
+github.com/prakash-p-3121/usermodel v0.0.1/go.mod h1:rg+E2S9uARRthLuJ/vfOxkNQx1ujPc/pl5ujAWhDcI0=
 github.com/stretchr/objx v0.1.0/go.mod h1:HFkY916IF+rwdDfMAkV7OtwuqBVzrE8GR6GFx+wExME=
 github.com/stretchr/objx v0.4.0/go.mod h1:YvHI0jy2hoMjB+UWwv71VJQ9isScKT/TqJzVSSt89Yw=
 github.com/stretchr/objx v0.5.0/go.mod h1:Yh+to48EsGEfYuaHDzXPcE3xhTkx73EhmCGUpEOglKo=

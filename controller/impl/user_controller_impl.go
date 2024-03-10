@@ -1,18 +1,39 @@
 package impl
 
 import (
-	"errors"
-	"usermgtms/controller/model"
+	"github.com/prakash-p-3121/errorlib"
+	rest_response_lib "github.com/prakash-p-3121/rest-response-lib"
+	"github.com/prakash-p-3121/usermgtms/controller/model"
+	"github.com/prakash-p-3121/usermodel"
+	"log"
 )
 
 type UserControllerImpl struct {
 }
 
-func (userControllerImpl *UserControllerImpl) UserContext(restCtx model.RestContext) error {
+func (userControllerImpl *UserControllerImpl) UserCreate(restCtx model.RestContext) {
+
 	ginRestCtx, ok := restCtx.(*model.GinRestContext)
 	if !ok {
-		return errors.New("Expected GinRestContext")
+		internalServerErr := errorlib.NewInternalServerError("Expected GinRestContext")
+		internalServerErr.SendRestResponse(ginRestCtx.CtxGet())
+		return
 	}
+
 	ctx := ginRestCtx.CtxGet()
-	ctx.BindJSON()
+	var req usermodel.UserCreateReq
+	err := ctx.BindJSON(&req)
+	if err != nil {
+		badReqErr := errorlib.NewBadReqError("payload-serialization")
+		badReqErr.SendRestResponse(ctx)
+		return
+	}
+
+	log.Println("first-name", *req.FirstName)
+	log.Println("first-name", *req.LastName)
+	log.Println("first-name", *req.CountryCode)
+	log.Println("first-name", *req.PhoneNumberStr)
+	log.Println("first-name", *req.EmailID)
+
+	rest_response_lib.OkNoContentResponse(ctx, nil)
 }

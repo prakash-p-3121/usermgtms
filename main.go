@@ -2,7 +2,7 @@ package main
 
 import (
 	"github.com/gin-gonic/gin"
-	"usermgtms/controller/UserController"
+	"github.com/prakash-p-3121/usermgtms/controller"
 )
 
 func main() {
@@ -13,7 +13,10 @@ func main() {
 		})
 	})
 
-	router.POST("/usermgt/user", UserController.UserCreate)
+	router.POST("/usermgt/user", controller.UserCreate)
 
-	router.Run()
+	err := router.Run("127.0.0.1:3000")
+	if err != nil {
+		panic("Error Starting UserMgtMs")
+	}
 }
