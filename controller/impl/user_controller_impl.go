@@ -2,18 +2,19 @@ package impl
 
 import (
 	"github.com/prakash-p-3121/errorlib"
-	rest_response_lib "github.com/prakash-p-3121/rest-response-lib"
-	"github.com/prakash-p-3121/usermgtms/controller/model"
+	"github.com/prakash-p-3121/restlib"
+	"github.com/prakash-p-3121/usermgtms/service/user_service"
 	"github.com/prakash-p-3121/usermodel"
 	"log"
 )
 
 type UserControllerImpl struct {
+	UserService user_service.UserService
 }
 
-func (userControllerImpl *UserControllerImpl) UserCreate(restCtx model.RestContext) {
+func (userControllerImpl *UserControllerImpl) UserCreate(restCtx restlib.RestContext) {
 
-	ginRestCtx, ok := restCtx.(*model.GinRestContext)
+	ginRestCtx, ok := restCtx.(*restlib.GinRestContext)
 	if !ok {
 		internalServerErr := errorlib.NewInternalServerError("Expected GinRestContext")
 		internalServerErr.SendRestResponse(ginRestCtx.CtxGet())
@@ -35,5 +36,11 @@ func (userControllerImpl *UserControllerImpl) UserCreate(restCtx model.RestConte
 	log.Println("first-name", *req.PhoneNumberStr)
 	log.Println("first-name", *req.EmailID)
 
-	rest_response_lib.OkNoContentResponse(ctx, nil)
+	idResp, appErr := userControllerImpl.UserService.UserCreate(&req)
+	if appErr != nil {
+		appErr.SendRestResponse(ctx)
+		return
+	}
+
+	restlib.OkNoContentResponse(ctx, idResp)
 }
