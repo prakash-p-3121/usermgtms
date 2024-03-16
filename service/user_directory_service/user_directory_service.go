@@ -8,5 +8,5 @@ import (
 type UserDirectoryService interface {
 	LookUpByEmailID(emailID string) (*model.EmailIDLookUpResp, errorlib.AppError)
 	LookUpByUserID(userID string) (*model.UserIDLookUpResp, errorlib.AppError)
-	LookUpCurrentWriteShard(userID string) (*model.DatabaseShard, errorlib.AppError)
+	LookUpShard(userID string) (*model.DatabaseShard, errorlib.AppError)
 }

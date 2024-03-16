@@ -7,5 +7,6 @@ import (
 )
 
 type UserService interface {
-	UserCreate(req *usermodel.UserCreateReq) (*restlib_model.IDResponse, errorlib.AppError)
+	CreateUser(req *usermodel.UserCreateReq) (*restlib_model.IDResponse, errorlib.AppError)
+	FindUser(userID string) (*usermodel.User, errorlib.AppError)
 }

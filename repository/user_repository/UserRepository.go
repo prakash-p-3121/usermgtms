@@ -7,5 +7,6 @@ import (
 )
 
 type UserRepository interface {
-	UserCreate(shardID int64, idGenResp *idgenmodel.IDGenResp, req *usermodel.UserCreateReq) errorlib.AppError
+	CreateUser(shardID int64, idGenResp *idgenmodel.IDGenResp, req *usermodel.UserCreateReq) errorlib.AppError
+	FindUser(shardID int64, userID string) (*usermodel.User, errorlib.AppError)
 }

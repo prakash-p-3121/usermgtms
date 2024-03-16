@@ -6,13 +6,14 @@ import (
 	"github.com/prakash-p-3121/usermgtms/service/user_service"
 	"github.com/prakash-p-3121/usermodel"
 	"log"
+	"strings"
 )
 
 type UserControllerImpl struct {
 	UserService user_service.UserService
 }
 
-func (userControllerImpl *UserControllerImpl) UserCreate(restCtx restlib.RestContext) {
+func (userControllerImpl *UserControllerImpl) CreateUser(restCtx restlib.RestContext) {
 
 	ginRestCtx, ok := restCtx.(*restlib.GinRestContext)
 	if !ok {
@@ -36,11 +37,38 @@ func (userControllerImpl *UserControllerImpl) UserCreate(restCtx restlib.RestCon
 	log.Println("first-name", *req.PhoneNumberStr)
 	log.Println("first-name", *req.EmailID)
 
-	idResp, appErr := userControllerImpl.UserService.UserCreate(&req)
+	idResp, appErr := userControllerImpl.UserService.CreateUser(&req)
 	if appErr != nil {
 		appErr.SendRestResponse(ctx)
 		return
 	}
 
-	restlib.OkNoContentResponse(ctx, idResp)
+	restlib.OkResponse(ctx, idResp)
+}
+
+func (userControllerImpl *UserControllerImpl) FindUser(restCtx restlib.RestContext) {
+
+	ginRestCtx, ok := restCtx.(*restlib.GinRestContext)
+	if !ok {
+		internalServerErr := errorlib.NewInternalServerError("Expected GinRestContext")
+		internalServerErr.SendRestResponse(ginRestCtx.CtxGet())
+		return
+	}
+
+	ctx := ginRestCtx.CtxGet()
+	userIDStr := ctx.Query("id")
+	userIDStr = strings.TrimSpace(userIDStr)
+	if len(userIDStr) == 0 {
+		badReqErr := errorlib.NewBadReqError("id")
+		badReqErr.SendRestResponse(ginRestCtx.CtxGet())
+		return
+	}
+
+	idResp, appErr := userControllerImpl.UserService.FindUser(userIDStr)
+	if appErr != nil {
+		appErr.SendRestResponse(ctx)
+		return
+	}
+
+	restlib.OkResponse(ctx, idResp)
 }

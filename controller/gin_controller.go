@@ -5,8 +5,14 @@ import (
 	"github.com/prakash-p-3121/restlib"
 )
 
-func UserCreate(ctx *gin.Context) {
+func CreateUser(ctx *gin.Context) {
 	ginRestCtx := restlib.NewGinRestContext(ctx)
 	controller := NewUserController()
-	controller.UserCreate(ginRestCtx)
+	controller.CreateUser(ginRestCtx)
+}
+
+func FindUser(ctx *gin.Context) {
+	ginRestCtx := restlib.NewGinRestContext(ctx)
+	controller := NewUserController()
+	controller.FindUser(ginRestCtx)
 }

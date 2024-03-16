@@ -3,6 +3,7 @@ package impl
 import (
 	"context"
 	"database/sql"
+	"errors"
 	"fmt"
 	"github.com/prakash-p-3121/errorlib"
 	"github.com/prakash-p-3121/idgenmodel"
@@ -18,21 +19,21 @@ type UserRepositoryImpl struct {
 	SingleStoreConnection *sql.DB
 }
 
-func (repository *UserRepositoryImpl) UserCreate(shardID int64,
+func (repository *UserRepositoryImpl) CreateUser(shardID int64,
 	idGenResp *idgenmodel.IDGenResp,
 	req *usermodel.UserCreateReq) errorlib.AppError {
 	db, err := mysqllib.RetrieveShardConnectionByShardID(repository.ShardConnectionsMap, shardID)
 	if err != nil {
-		return errorlib.NewBadReqError(err.Error())
+		return errorlib.NewInternalServerError(err.Error())
 	}
 
 	tx, err := db.BeginTx(context.Background(), nil)
 	if err != nil {
 		return errorlib.NewInternalServerError(err.Error())
 	}
-	appErr := repository.userCreate(tx, shardID, idGenResp, req)
+	appErr := repository.createUser(tx, shardID, idGenResp, req)
 	if appErr != nil {
-		return errorlib.NewInternalServerError(mysqllib.RollbackTx(tx, err).Error())
+		return errorlib.NewInternalServerError(mysqllib.RollbackTx(tx, appErr).Error())
 	}
 	err = tx.Commit()
 	if err != nil {
@@ -41,7 +42,7 @@ func (repository *UserRepositoryImpl) UserCreate(shardID int64,
 	return nil
 }
 
-func (repository *UserRepositoryImpl) userCreate(tx *sql.Tx, shardID int64,
+func (repository *UserRepositoryImpl) createUser(tx *sql.Tx, shardID int64,
 	idGenResp *idgenmodel.IDGenResp,
 	req *usermodel.UserCreateReq) errorlib.AppError {
 
@@ -52,12 +53,12 @@ func (repository *UserRepositoryImpl) userCreate(tx *sql.Tx, shardID int64,
                    first_name, 
                    last_name, 
                    email_id, 
-                   coutry_code, 
+                   country_code, 
                    phone_number, 
                    created_at, 
                    updated_at
                    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?) ;`
-	_, err := tx.Exec(qry, idGenResp.ID,
+	_, err := tx.Exec(qry, []byte(idGenResp.ID),
 		idGenResp.BitCount,
 		req.FirstName,
 		req.LastName,
@@ -97,4 +98,38 @@ func (repository *UserRepositoryImpl) hashPassword(password string) (string, err
 func (repository *UserRepositoryImpl) validatePassword(hashedPassword, inputPassword string) bool {
 	err := bcrypt.CompareHashAndPassword([]byte(hashedPassword), []byte(inputPassword))
 	return err == nil
+}
+
+func (repository *UserRepositoryImpl) FindUser(shardID int64, userID string) (*usermodel.User, errorlib.AppError) {
+	db, err := mysqllib.RetrieveShardConnectionByShardID(repository.ShardConnectionsMap, shardID)
+	if err != nil {
+		return nil, errorlib.NewInternalServerError(err.Error())
+	}
+	qry := `SELECT  id, 
+                   id_bit_count, 
+                   first_name, 
+                   last_name, 
+                   email_id, 
+                   country_code, 
+                   phone_number, 
+                   created_at, 
+                   updated_at FROM users WHERE id=?;`
+	row := db.QueryRow(qry, userID)
+	var user usermodel.User
+	err = row.Scan(&user.ID,
+		&user.IDBitCount,
+		&user.FirstName,
+		&user.FirstName,
+		&user.EmailID,
+		&user.CountryCode,
+		&user.PhoneNumberStr,
+		&user.CreatedAt,
+		&user.UpdatedAt)
+	if errors.Is(err, sql.ErrNoRows) {
+		return nil, errorlib.NewNotFoundError("user-id=" + userID + "-not-found")
+	}
+	if err != nil {
+		return nil, errorlib.NewInternalServerError(err.Error())
+	}
+	return &user, nil
 }

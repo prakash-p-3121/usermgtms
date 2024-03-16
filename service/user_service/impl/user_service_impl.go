@@ -15,7 +15,7 @@ type UserServiceImpl struct {
 	UserRepository user_repository.UserRepository
 }
 
-func (service *UserServiceImpl) UserCreate(req *usermodel.UserCreateReq) (*restlib_model.IDResponse, errorlib.AppError) {
+func (service *UserServiceImpl) CreateUser(req *usermodel.UserCreateReq) (*restlib_model.IDResponse, errorlib.AppError) {
 	appErr := req.Validate()
 	if appErr != nil {
 		return nil, appErr
@@ -25,7 +25,7 @@ func (service *UserServiceImpl) UserCreate(req *usermodel.UserCreateReq) (*restl
 	if err != nil {
 		return nil, errorlib.NewInternalServerError(err.Error())
 	}
-	idGenClient := idgenclient.NewIDGenClient(idGenMSCfg.Host, idGenMSCfg.Port)
+	idGenClient := idgenclient.NewIDGenClient(idGenMSCfg.Host, uint(idGenMSCfg.Port))
 	resp, appErr := idGenClient.NextID(database.UsersTable)
 	if appErr != nil {
 		return nil, appErr
@@ -33,15 +33,29 @@ func (service *UserServiceImpl) UserCreate(req *usermodel.UserCreateReq) (*restl
 	userID := resp.ID
 
 	userDirectoryService := user_directory_service.NewUserDirectoryService()
-	writeShardPtr, appErr := userDirectoryService.LookUpCurrentWriteShard(userID)
+	shardPtr, appErr := userDirectoryService.LookUpShard(userID)
 	if appErr != nil {
 		return nil, appErr
 	}
 
-	appErr = service.UserRepository.UserCreate(*writeShardPtr.ID, resp, req)
+	appErr = service.UserRepository.CreateUser(*shardPtr.ID, resp, req)
 	if appErr != nil {
 		return nil, appErr
 	}
 
 	return &restlib_model.IDResponse{ResourceID: userID}, nil
+}
+
+func (service *UserServiceImpl) FindUser(userID string) (*usermodel.User, errorlib.AppError) {
+	userDirectoryService := user_directory_service.NewUserDirectoryService()
+	shardPtr, appErr := userDirectoryService.LookUpShard(userID)
+	if appErr != nil {
+		return nil, appErr
+	}
+
+	user, appErr := service.UserRepository.FindUser(*shardPtr.ID, userID)
+	if appErr != nil {
+		return user, appErr
+	}
+	return user, appErr
 }
