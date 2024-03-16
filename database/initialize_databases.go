@@ -28,6 +28,6 @@ func GetSingleStoreConnection() *sql.DB {
 	return singleStoreDatabaseConnection
 }
 
-func GetTableList() []string {
+func GetShardedTableList() []string {
 	return []string{UsersTable}
 }

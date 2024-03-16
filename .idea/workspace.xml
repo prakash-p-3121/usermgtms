@@ -4,25 +4,7 @@
     <option name="autoReloadType" value="ALL" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="49ec4487-2f00-4949-b6fe-658e6f6b715a" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/database/migrate/001_create_table_users.up.sql" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/database/migrate/002_create_table_passwords.up.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/conf/database.toml" beforeDir="false" afterPath="$PROJECT_DIR$/conf/database.toml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controller/controller_factory.go" beforeDir="false" afterPath="$PROJECT_DIR$/controller/controller_factory.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controller/gin_controller.go" beforeDir="false" afterPath="$PROJECT_DIR$/controller/gin_controller.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controller/impl/user_controller_impl.go" beforeDir="false" afterPath="$PROJECT_DIR$/controller/impl/user_controller_impl.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controller/user_controller.go" beforeDir="false" afterPath="$PROJECT_DIR$/controller/user_controller.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/go.mod" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/go.sum" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/main.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/repository/user_repository/UserRepository.go" beforeDir="false" afterPath="$PROJECT_DIR$/repository/user_repository/UserRepository.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/repository/user_repository/impl/user_repository_impl.go" beforeDir="false" afterPath="$PROJECT_DIR$/repository/user_repository/impl/user_repository_impl.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/user_directory_service/impl/user_directory_service_impl.go" beforeDir="false" afterPath="$PROJECT_DIR$/service/user_directory_service/impl/user_directory_service_impl.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/user_directory_service/user_directory_service.go" beforeDir="false" afterPath="$PROJECT_DIR$/service/user_directory_service/user_directory_service.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/user_service/impl/user_service_impl.go" beforeDir="false" afterPath="$PROJECT_DIR$/service/user_service/impl/user_service_impl.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/user_service/user_service.go" beforeDir="false" afterPath="$PROJECT_DIR$/service/user_service/user_service.go" afterDir="false" />
-    </list>
+    <list default="true" id="49ec4487-2f00-4949-b6fe-658e6f6b715a" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
