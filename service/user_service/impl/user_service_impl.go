@@ -3,7 +3,7 @@ package impl
 import (
 	"github.com/prakash-p-3121/errorlib"
 	"github.com/prakash-p-3121/idgenclient"
-	restlib_model "github.com/prakash-p-3121/restlib/model"
+	"github.com/prakash-p-3121/idgenmodel"
 	"github.com/prakash-p-3121/usermgtms/cfg"
 	"github.com/prakash-p-3121/usermgtms/database"
 	"github.com/prakash-p-3121/usermgtms/repository/user_repository"
@@ -15,7 +15,7 @@ type UserServiceImpl struct {
 	UserRepository user_repository.UserRepository
 }
 
-func (service *UserServiceImpl) CreateUser(req *usermodel.UserCreateReq) (*restlib_model.IDResponse, errorlib.AppError) {
+func (service *UserServiceImpl) CreateUser(req *usermodel.UserCreateReq) (*idgenmodel.IDGenResp, errorlib.AppError) {
 	appErr := req.Validate()
 	if appErr != nil {
 		return nil, appErr
@@ -43,7 +43,7 @@ func (service *UserServiceImpl) CreateUser(req *usermodel.UserCreateReq) (*restl
 		return nil, appErr
 	}
 
-	return &restlib_model.IDResponse{ResourceID: userID}, nil
+	return resp, nil
 }
 
 func (service *UserServiceImpl) FindUser(userID string) (*usermodel.User, errorlib.AppError) {

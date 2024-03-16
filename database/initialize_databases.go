@@ -9,7 +9,8 @@ var shardIDToDatabaseConnectionMap *sync.Map
 var singleStoreDatabaseConnection *sql.DB
 
 const (
-	UsersTable string = "users"
+	UsersTable     string = "users"
+	PasswordsTable string = "passwords"
 )
 
 func SetShardConnectionsMap(connectionsMap *sync.Map) {
@@ -29,5 +30,5 @@ func GetSingleStoreConnection() *sql.DB {
 }
 
 func GetShardedTableList() []string {
-	return []string{UsersTable}
+	return []string{UsersTable, PasswordsTable}
 }

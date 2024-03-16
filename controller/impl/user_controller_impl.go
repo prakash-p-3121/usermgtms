@@ -5,7 +5,6 @@ import (
 	"github.com/prakash-p-3121/restlib"
 	"github.com/prakash-p-3121/usermgtms/service/user_service"
 	"github.com/prakash-p-3121/usermodel"
-	"log"
 	"strings"
 )
 
@@ -30,12 +29,6 @@ func (userControllerImpl *UserControllerImpl) CreateUser(restCtx restlib.RestCon
 		badReqErr.SendRestResponse(ctx)
 		return
 	}
-
-	log.Println("first-name", *req.FirstName)
-	log.Println("first-name", *req.LastName)
-	log.Println("first-name", *req.CountryCode)
-	log.Println("first-name", *req.PhoneNumberStr)
-	log.Println("first-name", *req.EmailID)
 
 	idResp, appErr := userControllerImpl.UserService.CreateUser(&req)
 	if appErr != nil {

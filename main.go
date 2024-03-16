@@ -46,7 +46,7 @@ func main() {
 	routerGroup.POST("/v1/user", controller.CreateUser)
 	routerGroup.GET("/v1/user", controller.FindUser)
 
-	err = router.Run("127.0.0.1:3000")
+	err = router.Run("127.0.0.1:3004")
 	if err != nil {
 		panic("Error Starting UserMgtMs")
 	}

@@ -4,7 +4,14 @@
     <option name="autoReloadType" value="ALL" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="49ec4487-2f00-4949-b6fe-658e6f6b715a" name="Changes" comment="" />
+    <list default="true" id="49ec4487-2f00-4949-b6fe-658e6f6b715a" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controller/impl/user_controller_impl.go" beforeDir="false" afterPath="$PROJECT_DIR$/controller/impl/user_controller_impl.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/initialize_databases.go" beforeDir="false" afterPath="$PROJECT_DIR$/database/initialize_databases.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/main.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/service/user_service/impl/user_service_impl.go" beforeDir="false" afterPath="$PROJECT_DIR$/service/user_service/impl/user_service_impl.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/service/user_service/user_service.go" beforeDir="false" afterPath="$PROJECT_DIR$/service/user_service/user_service.go" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -46,7 +53,7 @@
     "RunOnceActivity.go.modules.go.list.on.any.changes.was.set": "true",
     "git-widget-placeholder": "main",
     "go.import.settings.migrated": "true",
-    "last_opened_file_path": "/home/prakash/GolandProjects/usermgtms_new",
+    "last_opened_file_path": "/home/prakash/GolandProjects/ordermgtms",
     "node.js.detected.package.eslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "nodejs_package_manager_path": "npm"
